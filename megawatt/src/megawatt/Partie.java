@@ -121,7 +121,7 @@ public class Partie {
 public void acheterVilles(Joueur j,int etape){
 		System.out.println("achat des villes pour le joueur "+j.getId());
 		Scanner sc=new Scanner(System.in);
-		System.out.println("les villes sont :"+this.villesString()+"\n quand vous voullez vous arretez rentrez -1");
+		System.out.println("les villes sont :"+this.villesString()+"/n quand vous voullez vous arretez rentrez -1");
 		int nombre=sc.nextInt (); 
 		while(nombre != -1){
 			Ville v = this.villes[nombre];
@@ -138,9 +138,6 @@ public void acheterVilles(Joueur j,int etape){
 		public String villesString(){
 		String re = "";
 		for(int i=0; i<this.villes.length; i++){
-			if(i%8==0){
-				re+= "\n \n";
-			}
 			re+= " "+villes[i].getNom()+": "+i+" ";
 		}
 		return re;
@@ -148,6 +145,9 @@ public void acheterVilles(Joueur j,int etape){
 	
 	
 	public void etape1(){
+		ArrayList<Integer> villes_alim_par_joueur=new ArrayList<Integer>(); //cet array ne servira que si le jeu est fini, pour déterminer le gagnant
+		Joueur gagnant=null;
+		
 		while(this.conditionEtape1()){
 			this.joueurs=this.marcheU.lancerEnchere(this.joueurs,1);
 			for(int i=this.joueurs.length-1;i>=0;i--){
@@ -156,17 +156,28 @@ public void acheterVilles(Joueur j,int etape){
 			for(int i=this.joueurs.length-1;i>=0;i--){
 				this.acheterVilles(this.joueurs[i],1);
 			}
-			for(int i=this.joueurs.length-1;i>=0;i--){
-				int nbreVillesAlimentees=this.joueurs[i].choisirUsines();
-				//condition victoire!
-				this.joueurs[i].remunererJoueur(nbreVillesAlimentees);
+			for(int i=0;i<this.joueurs.length;i++){
+				int nbreVillesAlimentees=this.joueurs[this.joueurs.length-i-1].choisirUsines();
+				if(!conditionVictoire()) villes_alim_par_joueur.add(0, nbreVillesAlimentees);; //rajouté
+				this.joueurs[this.joueurs.length-i-1].remunererJoueur(nbreVillesAlimentees);
 			}
 			this.ressources.reapprovisionnement(this.joueurs.length,1);
+			if(!conditionVictoire()){
+				gagnant=vainqueur(villes_alim_par_joueur);  //rajouté
+			}
 			this.marcheU.actualiserMarcheEnchere();
 			this.ordreDesJoueurs(); //modification, cette ligne était au début
 			nbreTours++;
 		}
+		if(!conditionVictoire()){
+			if(gagnant!=null) System.out.println(gagnant.toString());
+		}else{
 		this.marcheU.transition_etape1_etape2();
+		System.out.println("\n\n\ns**********************************************************************************\n"
+				+ "/*****************************ETAPE 2*********************************************/*\n"
+				+ "********************************************************************************\n\n\n");
+		this.etape2();
+		}
 	}
 	
 	//complété par françois
@@ -174,7 +185,7 @@ public void acheterVilles(Joueur j,int etape){
 		ArrayList<Integer> villes_alim_par_joueur=new ArrayList<Integer>(); //cet array ne servira que si le jeu est fini, pour déterminer le gagnant
 		Joueur gagnant=null;
 		
-		while(this.conditionEtape2()&&conditionVictoire()){
+		while(this.conditionEtape2()&&(conditionVictoire())){
 			this.joueurs=this.marcheU.lancerEnchere(this.joueurs,2);
 			for(int i=this.joueurs.length-1;i>=0;i--){
 				this.ressources.acheterRessources(this.joueurs[i]);
@@ -196,8 +207,15 @@ public void acheterVilles(Joueur j,int etape){
 			nbreTours++;
 		}
 		
-		if(!conditionVictoire()) System.out.println(gagnant.toString());
+		if(!conditionVictoire()){
+			if(gagnant!=null) System.out.println(gagnant.toString());
+		}else{
 		this.marcheU.transition_etape2_etape3();
+		System.out.println("\n\n\ns**********************************************************************************\n"
+				+ "/*****************************ETAPE 3*********************************************/*\n"
+				+ "********************************************************************************\n\n\n");
+		this.etape3();
+		}
 	}
 	
 	//complété par françois
@@ -210,6 +228,7 @@ public void acheterVilles(Joueur j,int etape){
 				this.ressources.acheterRessources(this.joueurs[i]);
 			}
 			for(int i=this.joueurs.length-1;i>=0;i--){
+				System.out.println("\n\n/*************** Joueur "+this.joueurs[i].getId()+" **************/\n");
 				this.acheterVilles(this.joueurs[i],3);
 			}
 			for(int i=this.joueurs.length-1;i>=0;i--){
@@ -226,7 +245,7 @@ public void acheterVilles(Joueur j,int etape){
 			nbreTours++;
 		}
 		
-		System.out.println(gagnant.toString());
+		if(gagnant!=null) System.out.println(gagnant.toString());
 	}
 	public boolean conditionEtape1(){
 		boolean etape = true;
@@ -254,7 +273,6 @@ public void acheterVilles(Joueur j,int etape){
 	//complété par françois
 	public boolean conditionVictoire(){
 		int[] villes_connectees_max={0,0,18,17,17,15,14};  //nb de villes qu'un joueur doit atteindre en fonction de i joueurs
-		
 		
 		int max=0; //maximum de villes possédée par un des joueurs
 		for(int i=0;i<this.joueurs.length;i++){
@@ -287,6 +305,7 @@ public void acheterVilles(Joueur j,int etape){
 		
 		//si la taille d'index vaut 1, on retourne le vainqueur,sinon, on doit voir qui à le plus d'argent
 		while(index.size()>1){
+			System.out.println(index.toString());
 			if(this.joueurs[index.get(0)].getArgent()>this.joueurs[index.get(1)].getArgent()) index.remove(1);
 			else index.remove(0);
 		}
