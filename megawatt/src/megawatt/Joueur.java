@@ -48,12 +48,14 @@ public class Joueur {
 		boolean validation_choix=false;
 		List<Integer> usines_choisies=new ArrayList<Integer>();
 		
-		this.montrerUsines();
-		this.montrerRessources();
-		this.montrerArgent();
-		this.montrerNbVilles();
+		
 		//PHASE DE CHOIX DES USINES
 		do{
+			System.out.println("\n\n/*************** Joueur "+this.id+" **************/\n");
+			this.montrerUsines();
+			this.montrerRessources();
+			this.montrerArgent();
+			this.montrerNbVilles();
 			System.out.println("\nSélectionnez les usines que vous voulez utiliser (Taper par exemple 2 pour sélectionner l'usine 2)");
 			System.out.println("Tapez 0 lorsque vous avez validé votre sélection");
 			choix=sc.nextInt();
@@ -284,4 +286,3 @@ public class Joueur {
 	
 	
 }
-
