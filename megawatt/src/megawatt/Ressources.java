@@ -311,6 +311,7 @@ public class Ressources extends Observable{
 		Scanner sc=new Scanner(System.in);
 		for(int i=0;i<4;i++){
 			do{
+			System.out.println("\n\n/*************** Joueur "+joueur.getId()+" **************/\n");
 			System.out.println("Voici l'état actuel du marché:");
 			for(int j=0;j<4;j++) System.out.print(type[j]+": "+this.etat_actuel[j]+"  ");
 			System.out.println();
