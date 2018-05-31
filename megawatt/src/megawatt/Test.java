@@ -1,11 +1,16 @@
 package megawatt;
 
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Test {
 
 	public static void main(String[] args) {
+		
 		Joueur[] joueurs=new Joueur[3];
 		for(int i=0;i<3;i++){
-			Joueur j=new Joueur(i, 50000,7, new ArrayList<Usine>(), new ArrayList<Ville>(),new int[]{0,0,0,0},Color.black);
+			Joueur j=new Joueur(i+1, Color.black);
 			joueurs[i]=j;
 		}
 		
@@ -14,7 +19,7 @@ public class Test {
 			Usine temp=new Usine(new int[]{1,0,0,0},i,1,1);
 			usines.add(temp);
 		}
-		MarcheU marche=new MarcheU(usines);
+		MarcheU marche=new MarcheU();
 		Ressources rs=new Ressources();
 		
 		String[] v=new String[]{"MEXICO CITY SOUTH","MEXICO CITY NORTH","GUADALAJARA","MONTERREY","CHIHUAHUA","JUAREZ","ALBUQUERQUE", //zone 1 (violette)
@@ -32,15 +37,19 @@ public class Test {
 		}
 		Partie p=new Partie(joueurs, villes, marche,  rs);
 		p.etape1();
-		System.out.println("\n\n\ns**********************************************************************************\n"
-				+ "/*****************************ETAPE 2*********************************************/*\n"
-				+ "********************************************************************************\n\n\n");
-		p.etape2();
-		System.out.println("\n\n\ns**********************************************************************************\n"
-				+ "/*****************************ETAPE 3*********************************************/*\n"
-				+ "********************************************************************************\n\n\n");
-		p.etape3();
+		//System.out.println("\n\n\n**********************************************************************************\n"
+		//		+ "/*****************************ETAPE 2*********************************************/*\n"
+		//		+ "********************************************************************************\n\n\n");
+		//p.etape2();
+		//System.out.println("\n\n\ns**********************************************************************************\n"
+		//		+ "/*****************************ETAPE 3*********************************************/*\n"
+		//		+ "********************************************************************************\n\n\n");
+		//p.etape3();
+		
 
 	}
+		 
+		 
+	
 
 }
