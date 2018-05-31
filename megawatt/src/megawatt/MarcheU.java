@@ -57,10 +57,10 @@ public class MarcheU {
 		Usine usine42 =new Usine(new int[]{0,0,0,2},50,7,0);
 		Usine etape3  =new Usine(new int[]{0,0,0,0},100,0,0);
 		this.pioche=new ArrayList<Usine>();
-		this.pioche.add(usine1);
-		this.pioche.add(usine2);
-		this.pioche.add(usine3);
-		this.pioche.add(usine4);
+		//this.pioche.add(usine1);
+		//this.pioche.add(usine2);
+		//this.pioche.add(usine3);
+		//this.pioche.add(usine4);
 		this.pioche.add(usine5);
 		this.pioche.add(usine6);
 		this.pioche.add(usine7);
@@ -198,7 +198,7 @@ public class MarcheU {
 	 * @param etape
 	 */
 	public void actualiserMarcheEnchere() {
-		int place = this.usinesDispo.size()-1;
+		int place = this.usinesDispo.size();
 		for(int i = 0; i<this.usinesDispo.size();i++){
 			if(this.usinesDispo.get(i).getPrixInitial() > this.pioche.get(0).getPrixInitial() ){
 				place = i;
