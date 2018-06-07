@@ -9,17 +9,15 @@ import java.util.Scanner;
 public class Joueur {
 	private int id;
 	private int argent;
-	protected int nbrVilles;
 	protected List<Usine> usines;
 	private List<Ville> villes;
 	protected int[] ressources = {0, 0, 0, 0};
 	private Color couleur;
 	
-	public Joueur(int id, int argent, int nbrVilles, List<Usine> usines, List<Ville> villes, int[] ressources, Color couleur) {
+	public Joueur(int id, int argent, List<Usine> usines, List<Ville> villes, int[] ressources, Color couleur) {
 		super();
 		this.id = id;
 		this.argent = argent;
-		this.nbrVilles = nbrVilles;
 		this.usines = usines;
 		this.villes = villes;
 		this.ressources = ressources;
@@ -84,8 +82,7 @@ public class Joueur {
 			}
 		}
 		
-		//sc.close();
-		return somme>this.nbrVilles?this.nbrVilles:somme; //faut se rappeler que le joueur ne peut pas alimenter plus de ville qu'il n'en possède
+		return somme>this.getNbrVilles()?this.getNbrVilles():somme; //faut se rappeler que le joueur ne peut pas alimenter plus de ville qu'il n'en possède
 	}
 	
 	//fonction rajoutée par françois pour savoir si l'usine sélectionnée peut être utilisée
@@ -128,17 +125,11 @@ public class Joueur {
 		return couleur;
 	}
 
-	public void setCouleur(Color couleur) {
-		this.couleur = couleur;
-	}
 
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public int getArgent() {
 		return argent;
@@ -168,8 +159,8 @@ public class Joueur {
 		return villes;
 	}
 
-	public void setVilles(List<Ville> villes) {
-		this.villes = villes;
+	public int getNbrVilles(){
+		return this.getVilles().size();
 	}
 	///////Guillaume
 	public void addVilles(Ville v) {
@@ -191,17 +182,6 @@ public class Joueur {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + argent;
-		result = prime * result + id;
-		result = prime * result + nbrVilles;
-		result = prime * result + Arrays.hashCode(ressources);
-		return result;
-	}
-
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -214,8 +194,6 @@ public class Joueur {
 			return false;
 		if (id != other.id)
 			return false;
-		if (nbrVilles != other.nbrVilles)
-			return false;
 		if (!Arrays.equals(ressources, other.ressources))
 			return false;
 		return true;
@@ -223,7 +201,7 @@ public class Joueur {
 
 	@Override
 	public String toString() {
-		return "Joueur [id=" + id + ", argent=" + argent + ", nbrVilles=" + nbrVilles + ", ressources="
+		return "Joueur [id=" + id + ", argent=" + argent + ", nbrVilles=" + this.getNbrVilles() + ", ressources="
 				+ Arrays.toString(ressources) + "]";
 	}
 	
@@ -281,7 +259,7 @@ public class Joueur {
 	}
 	//fonction rajoutée par moi pour montrer le nombre de villes du joueur
 	public void montrerNbVilles(){
-		System.out.println("Votre nombre de villes: "+this.nbrVilles);
+		System.out.println("Votre nombre de villes: "+this.getNbrVilles());
 	}
 	
 	
