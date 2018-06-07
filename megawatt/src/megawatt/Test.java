@@ -35,7 +35,7 @@ public class Test {
 			Ville vi=new Ville(v[i]);
 			villes[i]=vi;
 		}
-		Partie p=new Partie(joueurs, villes, marche,  rs);
+		Partie p=new Partie(joueurs, marche,  rs);
 		p.etape1();
 		//System.out.println("\n\n\n**********************************************************************************\n"
 		//		+ "/*****************************ETAPE 2*********************************************/*\n"
