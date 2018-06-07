@@ -165,7 +165,7 @@ public class Carte {
 
 	public int getCoutAchat(Ville v, int etape) {
 		int i = 0;
-		while (estOccupe(i, v)) {
+		while (!(v.getEspace()[i].equals(-1))) {
 			i++;
 		}
 		if(i<etape){
@@ -176,18 +176,14 @@ public class Carte {
 
 	public void acheterVille(Joueur j, Ville v){
 		int i = 0;
-		while (estOccupe(i, v)) {
+		while (!(v.getEspace()[i].equals(-1))) {
 			i++;
 		}
 		if(i<3){
 		v.getEspace()[i] = j.getId();
 		}
 	}
-	
-	
-	public boolean estOccupe(int i, Ville v) {
-		return !(v.getEspace()[i].equals(-1));
-	}
+
 	public boolean estOccupeT(Ville v) {
 		for( int i=0; i<3; i++){
 			if (v.getEspace()[i].equals(-1)){
@@ -196,16 +192,7 @@ public class Carte {
 		}
 		return false;
 	}
-	
 
-	/////////
-	public String villesString(){
-		String re = "";
-		for(int i=0; i<this.listeDesVillesactuel.size(); i++){
-			re+= " "+this.listeDesVillesactuel.get(i).getNom()+": "+i+" ";
-		}
-		return re;
-	}
 	
 	// Dijkstra
 	
