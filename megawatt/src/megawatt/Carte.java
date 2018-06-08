@@ -229,7 +229,7 @@ public class Carte {
 					Ville nomarrive = entry2.getKey();
 					Integer coutarrive = entry2.getValue();
 					val = coutdepart + coutarrive;
-					System.out.print(nomarrive + " " + val);
+					//System.out.print(nomarrive + " " + val);
 					if (listVilleparcouru.containsKey(nomarrive)) {
 						if (listVilleparcouru.get(nomarrive) > val) {
 							listVilleparcouru.replace(nomarrive, val);
