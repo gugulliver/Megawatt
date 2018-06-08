@@ -2,8 +2,8 @@
 
 1.Introduction
 
-Le projet est basé sur un jeu appelé Jeu de Haut Tension, qui est un jeu stratégique comprenant l'achat de ressources et la construction de centrales électriques pour l'approvisionnement de villes. Le contenu de notre projet comprend la numérisation d du jeu, la création de quelques joueurs IA et l'analyse de stratégies gagnantes.
- Le projet global est divisé en deux grands parties: IHM et IA. Nous utilisons JAVA pour la programmation, dans la partie IHM nous avons créé le back end puis une interface présentable du jeu. Dans la section IA, nous avons créé des lecteurs informatiques pour augmenter l'optimisation de différentes stratégies. Ceci dans le but que l'IA ait la capacité de "l'apprentissage automatique" ainsi que celle de pouvoir modifier ses stratégies de base pour atteindre un niveau correcte face a un joueur humain.
+Le projet est basé sur un jeu appelé Jeu de Haut Tension, qui est un jeu stratégique comprenant l'achat de ressources et la construction de centrales électriques pour l'approvisionnement de villes. Le contenu de notre projet comprend la numérisation du jeu, la création de quelques joueurs IA et l'analyse de stratégies gagnantes.
+ Le projet global est divisé en deux grandes parties: IHM et IA. Nous utilisons JAVA pour la programmation, dans la partie IHM nous avons créé le back end puis une interface présentable du jeu. 
 
 
 2.Règles du jeu
