@@ -222,9 +222,42 @@ public class Ressources extends Observable{
 		return -1;
 	}
 	
+	
+	
+		public int capaciteDeLaResssource(int type,Joueur joueur){
+		int[] re = joueur.getRessources().clone();
+		int hyb =0;
+			for( Usine u : joueur.getUsines()){
+				if(!u.usine_hybride()){
+					for(int i=0; i<4; i++){
+						re[i] -=2*u.getRessources()[i];
+				}
+			}
+				else{
+				hyb+= 2*u.getRessources()[1];
+				}
+			}
+			if((re[1]>0)&&(hyb-re[1]>0)){
+				hyb-=re[1];
+				re[1]=0;
+			}
+			if((re[2]>0)&&(hyb-re[2]>0)){
+				hyb-=re[2];
+				re[2]=0;
+			}
+			re[1]-=hyb;
+			re[2]-=hyb;
+			
+		return -re[type];
+	}
+	
+	
 	public boolean achat_impossible(int qte,int type,Joueur joueur){
 		if(qte<0||qte>this.etat_actuel[type]){
 			System.out.println("ÉCHEC: Le marché ne peut pas répondre à cette demande.");
+			return true;
+		}if(qte>capaciteDeLaResssource(type, joueur)||(capaciteDeLaResssource(type, joueur)<0)){
+			System.out.println("Ã‰CHEC: vous ne pouvez pas stoque cette demande.");
 			return true;
 		}
 		if(type==0){
