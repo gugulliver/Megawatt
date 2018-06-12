@@ -139,14 +139,6 @@ public class Joueur {
 		this.argent = argent;
 	}
 
-	public int getNbrVilles() {
-		return nbrVilles;
-	}
-
-	public void setNbrVilles(int nbrVilles) {
-		this.nbrVilles = nbrVilles;
-	}
-
 	public List<Usine> getUsines() {
 		return usines;
 	}
@@ -165,7 +157,6 @@ public class Joueur {
 	///////Guillaume
 	public void addVilles(Ville v) {
 		this.villes.add(v);
-		this.nbrVilles++;
 	}
 	///////Guillaume
 	public void depenser(int cout) {
